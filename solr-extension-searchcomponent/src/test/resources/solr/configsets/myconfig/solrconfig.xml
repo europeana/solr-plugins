@@ -1,0 +1,23 @@
+<config>
+    <luceneMatchVersion>9.12</luceneMatchVersion>
+
+    <schemaFactory class="ClassicIndexSchemaFactory"/>
+
+    <searchComponent name="aliasing" class="eu.europeana.research.solr.ExtendedSearchComponent">
+        <str name="queryAliasFile">query_aliases.xml</str>
+    </searchComponent>
+
+    <requestHandler name="/select" class="solr.SearchHandler">
+        <lst name="defaults">
+            <str name="echoParams">explicit</str>
+            <int name="rows">10</int>
+            <str name="q.op">AND</str>
+            <str name="defType">lucene</str> <!-- it is less flexible to errors in the query syntax -->
+            <str name="df">text</str>
+        </lst>
+        <arr name="first-components">
+            <str>aliasing</str>
+        </arr>
+    </requestHandler>
+
+</config>
