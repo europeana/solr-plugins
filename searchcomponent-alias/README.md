@@ -1,14 +1,14 @@
 # Introduction
-A custom search component that processes and replaces predefined tags in the Solr _q_ and _fq_ parameters with their mapped query expressions.
-Derived from an earlier custom search handler developed at Europeana and updated for compatibility with Solr 9.10.1.
+Custom search component that replaces predefined tags in Solr’s _q_ and _fq_ parameters with mapped query expressions.
+Adapted from an earlier Europeana search handler and updated for compatibility with Solr 9.10.1.
 
 # Requirements
 - Solr Cloud v9.10.1
 - Lucene v9.12
 # Installation
 - Add the JAR file to the Solr _lib_ folder
-- Add the component to solrconfig.xml, setting the parameter _queryAliasFile_ to the name of the alias definition file.
-This file must be available in the configuration directory of each Solr core.
+- Add the component to solrconfig.xml, setting the parameter _queryAliasFile_ to the name of the alias definition file with the query expressions.
+This file must be available in the configuration directory.
 ```
     <searchComponent name="aliasing" class="eu.europeana.research.solr.ExtendedSearchComponent">
         <str name="queryAliasFile">query_aliases.xml</str>
@@ -49,8 +49,8 @@ You can define multiple aliases within a group, as well as multiple alias groups
 
 The alias file is loaded with the core. 
 Any subsequent changes to the file will only take effect after reloading the collection. 
-In SolrCloud the file should be found in the configuration of the collection in Zookeeper, 
-if not there, it falls back to the conf directory in each core.
+In SolrCloud the file should be found in the configuration of the collection in Zookeeper. 
+If it is not there, it falls back to the conf directory in each core.
 # Example
 
 Given this alias file:

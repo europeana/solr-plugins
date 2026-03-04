@@ -1,5 +1,5 @@
 # Introduction
-Extension of the class org.apache.solr.highlight.UnifiedSolrHighlighter to allow the Unified highlighter to return the offsets of the matched terms.
+Custom extension of org.apache.solr.highlight.UnifiedSolrHighlighter that enhances the Unified Highlighter by adding term offset information for highlighted fragments in the response.
 Related to ticket https://issues.apache.org/jira/browse/SOLR-1954
 
 # Requirements
@@ -15,21 +15,20 @@ Related to ticket https://issues.apache.org/jira/browse/SOLR-1954
         <highlighting class="eu.europeana.research.solr.OffsetAwareUnifiedHighlighter"/>
     </searchComponent>
 ```
-Note that we are replacing the highlighting process with this class, so hl.method is ignored and only the Unified highlighter is used.
+Note that we are replacing the highlighting process with this class, so hl.method is ignored and only the Unified Highlighter is used.
 
 # Use
 Activate the custom parameter _hl.offsets_:
 ```
 hl.offsets = true
 ```
-The offsets of the matching terms will be displayed for fields indexed with:
-termOffsets, termPositions and termVectors.
+The offsets of the highlighted terms will be displayed for fields indexed with termOffsets, termPositions and termVectors.
 
-It is expected that the rest of the parameters affecting the Unified highlighter can be used normally. We have specifically tested _hl.tag.pre_ and _hl.tag.post_.
+It is expected that the rest of the parameters affecting the Unified Highlighter can be used normally. We have specifically tested _hl.tag.pre_ and _hl.tag.post_.
 
 # Example
 
-Given these documents:
+Documents:
 ```
 id, name_en
 1, "Ender's Game"
@@ -37,12 +36,13 @@ id, name_en
 3  "Game of Game"
 4, "The Belgariad Boxed Set: Pawn of Prophecy / Queen of Sorcery / Magician's Gambit / Castle of Wizardry / Enchanters' End Game"
 ```
-and the parameters:
+Parameters:
 ```
+hl = true
 hl.offsets = true
 hl.snippets = 2
 ```
-The results are the following (indented here to facilitate reading):
+Given the documents and parameters above, the query "Game" returns a highlighting section containing the traditional snippets as well as the associated passages including term offset information. These are indented below for clarity.
 ```
 {1={name_en={
     snippets=Ender's <b>Game</b>, 
