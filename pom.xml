@@ -16,8 +16,8 @@
 
     <packaging>pom</packaging>
     <modules>
-        <module>solr-extension-highlighting</module>
-        <module>solr-extension-searchcomponent</module>
+        <module>highlighter-extension-offsets</module>
+        <module>searchcomponent-alias</module>
     </modules>
 
     <dependencies>
