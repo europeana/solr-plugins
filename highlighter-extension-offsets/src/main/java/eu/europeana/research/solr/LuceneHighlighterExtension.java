@@ -1,12 +1,7 @@
 package eu.europeana.research.solr;
 
-import org.apache.lucene.search.Query;
-import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.uhighlight.PassageFormatter;
 import org.apache.lucene.search.uhighlight.UnifiedHighlighter;
-
-import java.io.IOException;
-import java.util.Map;
 
 public class LuceneHighlighterExtension extends UnifiedHighlighter {
     private final String preTag;

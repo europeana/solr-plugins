@@ -37,3 +37,8 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/.idea/
+/searchcomponent-alias/.idea/
+/highlighter-extension-offsets/.idea/
+/searchcomponent-alias/out/
+/searchcomponent-alias/.idea/

@@ -8,17 +8,13 @@ import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
-import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,9 +45,7 @@ public class Alias {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         Document doc = dbf.newDocumentBuilder().parse(new ByteArrayInputStream(bytes));
 
-        //NodeList aliasFields = (NodeList) XPathFactory.newInstance().newXPath().evaluate("alias-config", doc, XPathConstants.NODESET);
         NodeList aliasFields = doc.getElementsByTagName("alias-config");
-        //System.out.println("Processing alias");
         for (int i = 0; i < aliasFields.getLength(); i++) {
             ElementImpl pseudofieldNode = (ElementImpl) aliasFields.item(i);
             String fieldName = pseudofieldNode.getElementsByTagName("alias-pseudofield").item(0).getTextContent();
