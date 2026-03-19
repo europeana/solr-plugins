@@ -17,7 +17,7 @@ import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.util.*;
 
-public class ExtendedSearchComponent extends SearchComponent implements SolrCoreAware {
+public class ExtendedSearchComponent extends SearchComponent {
 
 
     private static final Logger log =
@@ -39,10 +39,7 @@ public class ExtendedSearchComponent extends SearchComponent implements SolrCore
         }
     }
 
-    //It should load the configuration from Zookeeper if it is there, if not, it falls back to the conf directory in each core
-    @Override
-    public void inform(SolrCore solrCore) {
-        // Load rules when core is reloaded and ready
+    private void lazyLoad(SolrCore solrCore){
         if (alias == null) {
             synchronized (ExtendedSearchComponent.class) {
                 if (alias == null) {
@@ -63,9 +60,9 @@ public class ExtendedSearchComponent extends SearchComponent implements SolrCore
         }
     }
 
-
     @Override
     public void prepare(ResponseBuilder rb) {
+        lazyLoad(rb.req.getCore());
         SolrParams params = rb.req.getParams();
         ModifiableSolrParams newParams = new ModifiableSolrParams(params);
 
